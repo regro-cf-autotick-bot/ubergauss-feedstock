@@ -7,23 +7,23 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/ubergauss-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/ubergauss-{{ version }}.tar.gz
   sha256: 617701b2bc20f868596e38f9884522f18d34504c057aa0bb91b59702389f2551
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   host:
     - pip
-    - python >=3.8
+    - python {{ python_min }}
   run:
     - dill
     - lmz
     - numpy
-    - python >=3.8
+    - python >={{ python_min }}
     - scikit-learn
     - scipy
 
@@ -35,6 +35,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/smautner/ubergauss
